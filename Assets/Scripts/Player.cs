@@ -120,6 +120,11 @@ public class Player : MonoBehaviour
         {
             foreach (var wheel in wheels)
             {
+                if (wheel.axel == Axel.Rear)
+                {
+                    WheelFrictionCurve frictionCurve = wheel.wheelCollider.forwardFriction;
+                    frictionCurve.stiffness = 1;
+                }
                 wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
             }
 
@@ -128,6 +133,11 @@ public class Player : MonoBehaviour
         {
             foreach (var wheel in wheels)
             {
+                if (wheel.axel == Axel.Rear)
+                {
+                    WheelFrictionCurve frictionCurve = wheel.wheelCollider.forwardFriction;
+                    frictionCurve.stiffness = 2;
+                }
                 wheel.wheelCollider.brakeTorque = 0;
             }
 

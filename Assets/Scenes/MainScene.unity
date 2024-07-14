@@ -8804,7 +8804,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -12344,7 +12344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &431831390
 Transform:
   m_ObjectHideFlags: 0
@@ -13284,7 +13284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &448499429
 Transform:
   m_ObjectHideFlags: 0
@@ -21895,7 +21895,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -67524,7 +67524,7 @@ MonoBehaviour:
   brakeAcceleration: 19690.08
   doAnimate: 0
   turnSensitivity: 0.5
-  maxSteerAngle: 40
+  maxSteerAngle: 80
   maxSpeed: 61
   _centerOfMass: {x: 0, y: -0.652, z: 0}
   wheels:
@@ -67672,7 +67672,7 @@ Transform:
   m_GameObject: {fileID: 2062853918}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 812.86, y: 1.341, z: -9.32}
+  m_LocalPosition: {x: 805, y: 1.341, z: -9.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
