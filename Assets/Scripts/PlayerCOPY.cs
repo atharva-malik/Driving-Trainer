@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerCOPY : MonoBehaviour
 {
     public enum ControlMode
     {
@@ -44,9 +44,6 @@ public class Player : MonoBehaviour
 
     private Rigidbody carRb;
 
-
-    public float acceleratorPressure = 0f;
-
     void Start()
     {
         carRb = GetComponent<Rigidbody>();
@@ -82,25 +79,7 @@ public class Player : MonoBehaviour
     {
         if(control == ControlMode.Keyboard)
         {
-            if (Input.GetKey(KeyCode.W)){
-                maxSteerAngle = 80f;
-                if(acceleratorPressure < 100){
-                    acceleratorPressure += 10f * Time.deltaTime;
-                }else{
-                    acceleratorPressure = 100f;
-                }
-            }else if (Input.GetKey(KeyCode.S)){
-                maxSteerAngle = 5f;
-                if(acceleratorPressure > -50f){
-                    acceleratorPressure -= 10f * Time.deltaTime;
-                }else{
-                    acceleratorPressure = -50f;
-                }
-            }else{
-                if (acceleratorPressure > -2 && acceleratorPressure < 2)
-                    acceleratorPressure = 5f;
-            }
-            moveInput = acceleratorPressure/100;
+            moveInput = Input.GetAxis("Vertical");
             steerInput = Input.GetAxis("Horizontal");
         }
     }
@@ -108,19 +87,18 @@ public class Player : MonoBehaviour
     void Move()
     {
         foreach(var wheel in wheels)
-        {
-            float power = Math.Abs(moveInput);
-            if (carRb.velocity.magnitude < maxSpeed*power)
             {
-                wheel.wheelCollider.motorTorque = moveInput * 600 * maxAcceleration * Time.deltaTime;
-            }else
-            {
-                wheel.wheelCollider.motorTorque = 0;
-                if (carRb.velocity.magnitude > maxSpeed*power)
+                if (carRb.velocity.magnitude < maxSpeed)
                 {
-                    carRb.velocity = carRb.velocity.normalized * maxSpeed*power;
+                    wheel.wheelCollider.motorTorque = moveInput * 600 * maxAcceleration * Time.deltaTime;
+                }else
+                {
+                    wheel.wheelCollider.motorTorque = 0;
+                    if (carRb.velocity.magnitude > maxSpeed)
+                    {
+                        carRb.velocity = carRb.velocity.normalized * maxSpeed;
+                    }
                 }
-            }
         }
     }
 
@@ -142,8 +120,11 @@ public class Player : MonoBehaviour
         {
             foreach (var wheel in wheels)
             {
-                if (acceleratorPressure > 0f)
-                    acceleratorPressure -= 5f * Time.deltaTime;
+                if (wheel.axel == Axel.Rear)
+                {
+                    WheelFrictionCurve frictionCurve = wheel.wheelCollider.forwardFriction;
+                    frictionCurve.stiffness = 1;
+                }
                 wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
             }
 
@@ -152,6 +133,11 @@ public class Player : MonoBehaviour
         {
             foreach (var wheel in wheels)
             {
+                if (wheel.axel == Axel.Rear)
+                {
+                    WheelFrictionCurve frictionCurve = wheel.wheelCollider.forwardFriction;
+                    frictionCurve.stiffness = 2;
+                }
                 wheel.wheelCollider.brakeTorque = 0;
             }
 

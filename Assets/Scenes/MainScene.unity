@@ -67540,6 +67540,7 @@ MonoBehaviour:
   - wheelModel: {fileID: 644712339}
     wheelCollider: {fileID: 668809437}
     axel: 1
+  acceleratorPressure: 100
 --- !u!82 &2062853922
 AudioSource:
   m_ObjectHideFlags: 0
@@ -67672,7 +67673,7 @@ Transform:
   m_GameObject: {fileID: 2062853918}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 805, y: 1.341, z: -9.32}
+  m_LocalPosition: {x: -52.6, y: 1.341, z: 49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -71566,6 +71567,7 @@ MonoBehaviour:
   - wheelModel: {fileID: 1000012940347895}
     wheelCollider: {fileID: 1195469506}
     axel: 1
+  acceleratorPressure: 0
 --- !u!82 &4000013051251501
 AudioSource:
   m_ObjectHideFlags: 0
