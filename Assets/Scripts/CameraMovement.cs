@@ -31,6 +31,6 @@ public class CameraMovement : MonoBehaviour
         yRotation = Mathf.Clamp(yRotation, -yClampRotation, yClampRotation);
 
         // Apply rotations
-        transform.rotation = Quaternion.Euler(yRotation, xRotation, 0.0f);
+        transform.localRotation = Quaternion.Euler(yRotation, xRotation, 0.0f);
     }
 }
