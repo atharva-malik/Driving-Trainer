@@ -4132,7 +4132,7 @@ MonoBehaviour:
   brakeAcceleration: 19690.08
   doAnimate: 0
   turnSensitivity: 0.5
-  maxSteerAngle: 20
+  maxSteerAngle: 35
   maxSpeed: 65
   _centerOfMass: {x: 0, y: -0.652, z: 0}
   wheels:
