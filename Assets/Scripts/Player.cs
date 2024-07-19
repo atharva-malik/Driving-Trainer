@@ -105,6 +105,7 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        Debug.Log(carRb.velocity.z + ", " + carRb.velocity.x);
         foreach(var wheel in wheels)
         {
             float power = Math.Abs(moveInput);
@@ -114,6 +115,7 @@ public class Player : MonoBehaviour
             }else
             {
                 wheel.wheelCollider.motorTorque = 0;
+                wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
                 if (carRb.velocity.magnitude > maxSpeed*power)
                 {
                     carRb.velocity = carRb.velocity.normalized * maxSpeed*power;
@@ -154,6 +156,10 @@ public class Player : MonoBehaviour
             }
 
         }
+    }
+
+    private float calculateVector(Vector3 sped){
+        return Mathf.Sqrt(Mathf.Pow(sped.x, 2) + Mathf.Pow(sped.z, 2));
     }
 
     void AnimateWheels()
