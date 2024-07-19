@@ -13,8 +13,8 @@ public class CameraMovement : MonoBehaviour
 
     void Start()
     {
-        // Ensure the Cursor is not locked when the game starts
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()

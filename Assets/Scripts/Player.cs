@@ -83,21 +83,19 @@ public class Player : MonoBehaviour
         if(control == ControlMode.Keyboard)
         {
             if (Input.GetKey(KeyCode.W)){
-                maxSteerAngle = 80f;
                 if(acceleratorPressure < 100){
                     acceleratorPressure += 10f * Time.deltaTime;
                 }else{
                     acceleratorPressure = 100f;
                 }
             }else if (Input.GetKey(KeyCode.S)){
-                maxSteerAngle = 5f;
-                if(acceleratorPressure > -50f){
+                if(acceleratorPressure > -5f){
                     acceleratorPressure -= 10f * Time.deltaTime;
                 }else{
-                    acceleratorPressure = -50f;
+                    acceleratorPressure = -5f;
                 }
             }else{
-                if (acceleratorPressure > -2 && acceleratorPressure < 2)
+                if (acceleratorPressure > -1 && acceleratorPressure < 1)
                     acceleratorPressure = 5f;
             }
             moveInput = acceleratorPressure/100;
