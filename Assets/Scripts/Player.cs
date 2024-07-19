@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
                 }
             }else{
                 if (acceleratorPressure > -1 && acceleratorPressure < 1)
-                    acceleratorPressure = 5f;
+                    acceleratorPressure = 4f;
             }
             moveInput = acceleratorPressure/100;
             steerInput = Input.GetAxis("Horizontal");
