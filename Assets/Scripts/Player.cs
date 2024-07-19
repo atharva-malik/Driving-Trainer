@@ -105,7 +105,6 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        Debug.Log(carRb.velocity.z + ", " + carRb.velocity.x);
         foreach(var wheel in wheels)
         {
             float power = Math.Abs(moveInput);
@@ -118,10 +117,27 @@ public class Player : MonoBehaviour
                 wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
                 if (carRb.velocity.magnitude > maxSpeed*power)
                 {
-                    carRb.velocity = carRb.velocity.normalized * maxSpeed*power;
+                    float[] vals = getValues(carRb.velocity.x, carRb.velocity.z, maxSpeed*power);
+                    float x = vals[0];
+                    float z = vals[1];
+                    carRb.velocity = new Vector3(x, carRb.velocity.y, z);
                 }
             }
         }
+    }
+
+    private float[] getValues(float x, float z, float v)
+    {
+        // Formula:
+        // int a = -16**2 + 8**2
+        // int b = (v**2)/a
+        // int rat_num = b**0.5
+        // return new float[a*rat_num, b*rat_num]
+        float[] ans = new float[2];
+        float rat_num = Mathf.Sqrt(v*v/(x*x + z*z));
+        ans[0] = x*rat_num;
+        ans[1] = z*rat_num;
+        return ans;
     }
 
     void Steer()
