@@ -109,11 +109,12 @@ public class Player : MonoBehaviour
             float power = Math.Abs(moveInput);
             if (carRb.velocity.magnitude < maxSpeed*power)
             {
-                wheel.wheelCollider.motorTorque = moveInput * 600 * maxAcceleration * Time.deltaTime;
+                // wheel.wheelCollider.motorTorque = moveInput * 600 * maxAcceleration * Time.deltaTime;
+                wheel.wheelCollider.motorTorque = moveInput * maxAcceleration * Time.deltaTime * 100;
             }else
             {
-                if (carRb.velocity.magnitude > maxSpeed*power && ((transform.eulerAngles.x > -5 && transform.eulerAngles.x < 5)|| 
-                (convert(transform.eulerAngles.x) > -5 && convert(transform.eulerAngles.x) < 5))) // Checking if player is not on a slope
+                if (carRb.velocity.magnitude > maxSpeed*power && ((transform.eulerAngles.x > -8 && transform.eulerAngles.x < 5)|| 
+                (convert(transform.eulerAngles.x) > -8 && convert(transform.eulerAngles.x) < 5))) // Checking if player is not on a slope
                 {
                     // ! Instead of hard assigning the velocity, I want to soft assign it.
                     // float[] vals = getValues(carRb.velocity.x, carRb.velocity.z, maxSpeed*power);
@@ -122,6 +123,8 @@ public class Player : MonoBehaviour
                     // carRb.velocity = new Vector3(x, carRb.velocity.y, z);
                     wheel.wheelCollider.motorTorque = 0;
                     carRb.velocity = new Vector3(carRb.velocity.x - (carRb.velocity.x * Time.deltaTime * 0.1f), carRb.velocity.y, carRb.velocity.z - (carRb.velocity.z * Time.deltaTime * 0.1f));
+                }else{
+                    wheel.wheelCollider.motorTorque = 0;
                 }
             }
         }

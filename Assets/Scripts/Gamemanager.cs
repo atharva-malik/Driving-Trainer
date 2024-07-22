@@ -7,10 +7,12 @@ public class Gamemanager : MonoBehaviour
 {
     [SerializeField] private TMP_Text countdown;
     [SerializeField] private TMP_Text LeaderBoard;
+    [SerializeField] private Transform respawnPoint;
     [SerializeField] private List<PlayerAgent> playerAgents;
     [SerializeField] private Player player;
 
     private List<string> ranks = new List<string>();
+    private GameObject playerObj;
     private string leaderboard = "";
 
     public bool playerFinished = false;
@@ -19,6 +21,7 @@ public class Gamemanager : MonoBehaviour
     void Start()
     {
         StartCoroutine(Countdown());
+        playerObj = player.gameObject;
     }
 
     // Update is called once per frame
@@ -30,6 +33,12 @@ public class Gamemanager : MonoBehaviour
         }
         if (playerFinished){
             LeaderBoard.text = leaderboard;
+        }
+        if (playerObj.transform.position.y < 1 || Input.GetKeyDown(KeyCode.R)){
+            playerObj.transform.position = respawnPoint.position;
+            playerObj.transform.rotation = respawnPoint.rotation;
+            playerObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            player.acceleratorPressure = 0;
         }
     }
 
