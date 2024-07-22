@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class SpeedRuleChecker : MonoBehaviour
     void Update()
     {
         currentSpeed = player.GetComponent<Rigidbody>().velocity.magnitude * 3.6f;
+        currentSpeed = (float)Math.Floor(currentSpeed);
+        currentMaxSpeed = RuleChecker.Instance.currentMaxSpeed;
         if (currentSpeed > currentMaxSpeed)
             Debug.LogWarning("SPEED LIMIT EXCEEDED" + currentSpeed);
     }
