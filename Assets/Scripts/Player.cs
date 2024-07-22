@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
     {
         carRb = GetComponent<Rigidbody>();
         carRb.centerOfMass = _centerOfMass;
-
     }
 
     void Update()
@@ -95,7 +94,7 @@ public class Player : MonoBehaviour
                     acceleratorPressure = -5f;
                 }
             }else{
-                if (acceleratorPressure > -1 && acceleratorPressure < 1)
+                if (acceleratorPressure > -1 && acceleratorPressure < 1 && !Input.GetKey(KeyCode.Space)) // Player is not braking
                     acceleratorPressure = 4f;
             }
             moveInput = acceleratorPressure/100;
@@ -113,22 +112,24 @@ public class Player : MonoBehaviour
                 wheel.wheelCollider.motorTorque = moveInput * 600 * maxAcceleration * Time.deltaTime;
             }else
             {
-                if (carRb.velocity.magnitude > maxSpeed*power && (transform.rotation.x > -1 && transform.rotation.x < 1)) // Checking if player is not on a slope
+                if (carRb.velocity.magnitude > maxSpeed*power && ((transform.eulerAngles.x > -5 && transform.eulerAngles.x < 5)|| 
+                (convert(transform.eulerAngles.x) > -5 && convert(transform.eulerAngles.x) < 5))) // Checking if player is not on a slope
                 {
-                    Debug.Log(transform.rotation.x);
+                    // ! Instead of hard assigning the velocity, I want to soft assign it.
                     // float[] vals = getValues(carRb.velocity.x, carRb.velocity.z, maxSpeed*power);
                     // float x = vals[0];
                     // float z = vals[1];
                     // carRb.velocity = new Vector3(x, carRb.velocity.y, z);
                     wheel.wheelCollider.motorTorque = 0;
-                    wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
-                    float[] vals = getValues(carRb.velocity.x, carRb.velocity.z, maxSpeed*power);
-                    float x = vals[0];
-                    float z = vals[1];
-                    carRb.velocity = new Vector3(x, carRb.velocity.y, z);
+                    carRb.velocity = new Vector3(carRb.velocity.x - (carRb.velocity.x * Time.deltaTime * 0.1f), carRb.velocity.y, carRb.velocity.z - (carRb.velocity.z * Time.deltaTime * 0.1f));
                 }
             }
         }
+    }
+
+    private float convert(float x)
+    {
+        return 360 - x;
     }
 
     private float[] getValues(float x, float z, float v)
@@ -177,10 +178,6 @@ public class Player : MonoBehaviour
             }
 
         }
-    }
-
-    private float calculateVector(Vector3 sped){
-        return Mathf.Sqrt(Mathf.Pow(sped.x, 2) + Mathf.Pow(sped.z, 2));
     }
 
     void AnimateWheels()
