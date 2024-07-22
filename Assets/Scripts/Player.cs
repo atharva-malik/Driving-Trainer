@@ -113,10 +113,15 @@ public class Player : MonoBehaviour
                 wheel.wheelCollider.motorTorque = moveInput * 600 * maxAcceleration * Time.deltaTime;
             }else
             {
-                wheel.wheelCollider.motorTorque = 0;
-                wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
-                if (carRb.velocity.magnitude > maxSpeed*power)
+                if (carRb.velocity.magnitude > maxSpeed*power && (transform.rotation.x > -1 && transform.rotation.x < 1)) // Checking if player is not on a slope
                 {
+                    Debug.Log(transform.rotation.x);
+                    // float[] vals = getValues(carRb.velocity.x, carRb.velocity.z, maxSpeed*power);
+                    // float x = vals[0];
+                    // float z = vals[1];
+                    // carRb.velocity = new Vector3(x, carRb.velocity.y, z);
+                    wheel.wheelCollider.motorTorque = 0;
+                    wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
                     float[] vals = getValues(carRb.velocity.x, carRb.velocity.z, maxSpeed*power);
                     float x = vals[0];
                     float z = vals[1];
