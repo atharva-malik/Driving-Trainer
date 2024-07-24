@@ -35,9 +35,10 @@ public class Gamemanager : MonoBehaviour
             LeaderBoard.text = leaderboard;
         }
         if (playerObj.transform.position.y < 1 || Input.GetKeyDown(KeyCode.R)){
+            playerObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            playerObj.GetComponent<Player>().resetWheels();
             playerObj.transform.position = respawnPoint.position;
             playerObj.transform.rotation = respawnPoint.rotation;
-            playerObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             player.acceleratorPressure = 0;
         }
     }

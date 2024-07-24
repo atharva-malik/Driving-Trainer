@@ -194,4 +194,12 @@ public class Player : MonoBehaviour
             wheel.wheelModel.transform.rotation = rot;
         }
     }
+
+    internal void resetWheels()
+    {
+        foreach (var wheel in wheels){
+            wheel.wheelCollider.motorTorque = 0;
+            wheel.wheelCollider.brakeTorque = 0;
+        }
+    }
 }
