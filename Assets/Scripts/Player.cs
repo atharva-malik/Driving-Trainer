@@ -165,16 +165,22 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) || moveInput == 0)
         {
+            lightManager.Instance.isBraking = true;
             foreach (var wheel in wheels)
             {
                 if (acceleratorPressure > 0f)
                     acceleratorPressure -= 5f * Time.deltaTime;
+                else if (acceleratorPressure < -1f)
+                    acceleratorPressure += 5f * Time.deltaTime;
+                else
+                    acceleratorPressure = 0f;
                 wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
             }
 
         }
         else
         {
+            lightManager.Instance.isBraking = false;
             foreach (var wheel in wheels)
             {
                 wheel.wheelCollider.brakeTorque = 0;

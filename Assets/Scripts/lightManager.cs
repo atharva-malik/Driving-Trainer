@@ -19,6 +19,8 @@ public class lightManager : MonoBehaviour
 
     private float blinkerCooldown = 0f;
 
+    public bool isBraking = false;
+
     private void Awake() {
         if (Instance != null && Instance != this)
         {
@@ -63,6 +65,11 @@ public class lightManager : MonoBehaviour
         }else{
             blinkerCooldown += Time.deltaTime;
         }
+        if(isBraking){
+            EnableRearLights();
+        }else{
+            DisableRearLights();
+        }
         if (Input.GetKeyDown(KeyCode.L)){
             EnableFrontLights();
         }else if (Input.GetKeyDown(KeyCode.Q)){
@@ -70,8 +77,31 @@ public class lightManager : MonoBehaviour
         }else if (Input.GetKeyDown(KeyCode.E)){
             EnableRightLights();
         }
-        // EnableRearLights();
         // DisableAllLights();
+    }
+
+    private void DisableRearLights()
+    {
+        foreach (Light light in rearLights)
+            light.enabled = false;
+    }
+
+    private void EnableRearLights()
+    {
+        if (leftLightState == 1){
+            leftArrow.SetActive(false);
+            foreach (Light light in leftLights)
+                light.enabled = false;
+            leftLightState = 0;
+        }
+        if (rightLightState == 1){
+            rightArrow.SetActive(false);
+            foreach (Light light in rightLights)
+                light.enabled = false;
+            rightLightState = 0;
+        }
+        foreach (Light light in rearLights)
+            light.enabled = true;
     }
 
     private void EnableRightLights()
@@ -88,8 +118,9 @@ public class lightManager : MonoBehaviour
             return;
         }
         rightArrow.SetActive(true);
-        foreach (Light light in rightLights)
+        foreach (Light light in rightLights){
             light.enabled = true;
+        }
         rightLightState = 1;
     }
 
