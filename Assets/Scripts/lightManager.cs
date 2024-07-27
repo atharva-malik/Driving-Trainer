@@ -32,13 +32,37 @@ public class lightManager : MonoBehaviour
 
     void Start()
     {
-        leftArrow.SetActive(false);
-        rightArrow.SetActive(false);
         DisableAllLights();
     }
 
     void Update()
     {
+        if (blinkerCooldown >= 0.75f){
+            if (leftLightState == 1){
+                if (leftLights[0].enabled){
+                    leftLights[0].enabled = false;
+                    leftLights[1].enabled = false;
+                    leftArrow.SetActive(false);
+                }else{
+                    leftLights[0].enabled = true;
+                    leftLights[1].enabled = true;
+                    leftArrow.SetActive(true);
+                }
+            }else if (rightLightState == 1){
+                if (rightLights[0].enabled){
+                    rightLights[0].enabled = false;
+                    rightLights[1].enabled = false;
+                    rightArrow.SetActive(false);
+                }else{
+                    rightLights[0].enabled = true;
+                    rightLights[1].enabled = true;
+                    rightArrow.SetActive(true);
+                }
+            }
+            blinkerCooldown = 0f;
+        }else{
+            blinkerCooldown += Time.deltaTime;
+        }
         if (Input.GetKeyDown(KeyCode.L)){
             EnableFrontLights();
         }else if (Input.GetKeyDown(KeyCode.Q)){
@@ -46,36 +70,14 @@ public class lightManager : MonoBehaviour
         }else if (Input.GetKeyDown(KeyCode.E)){
             EnableRightLights();
         }
-        if (blinkerCooldown >= 1){
-            if (leftLightState == 1){
-                if (leftLights[0].enabled){
-                    leftLights[0].enabled = false;
-                    leftLights[1].enabled = false;
-                    rightArrow.SetActive(false);
-                }else{
-                    leftLights[0].enabled = true;
-                    leftLights[1].enabled = true;
-                    rightArrow.SetActive(true);
-                }
-            }else if (rightLightState == 1){
-                if (rightLights[0].enabled){
-                    rightLights[0].enabled = false;
-                    rightLights[1].enabled = false;
-                }else{
-                    rightLights[0].enabled = true;
-                    rightLights[1].enabled = true;
-                }
-            }
-            blinkerCooldown = 0f;
-        }else{
-            blinkerCooldown += Time.deltaTime;
-        }
         // EnableRearLights();
         // DisableAllLights();
     }
 
     private void EnableRightLights()
     {
+        leftArrow.SetActive(false);
+        rightArrow.SetActive(false);
         foreach (Light light in leftLights)
             light.enabled = false;
         leftLightState = 0;
@@ -85,6 +87,7 @@ public class lightManager : MonoBehaviour
             rightLightState = 0;
             return;
         }
+        rightArrow.SetActive(true);
         foreach (Light light in rightLights)
             light.enabled = true;
         rightLightState = 1;
@@ -92,6 +95,8 @@ public class lightManager : MonoBehaviour
 
     private void EnableLeftLights()
     {
+        leftArrow.SetActive(false);
+        rightArrow.SetActive(false);
         foreach (Light light in rightLights)
             light.enabled = false;
         rightLightState = 0;
@@ -101,6 +106,7 @@ public class lightManager : MonoBehaviour
             leftLightState = 0;
             return;
         }
+        leftArrow.SetActive(true);
         foreach (Light light in leftLights)
             light.enabled = true;
         leftLightState = 1;
@@ -127,6 +133,8 @@ public class lightManager : MonoBehaviour
     }
 
     private void DisableAllLights(){
+        leftArrow.SetActive(false);
+        rightArrow.SetActive(false);
         foreach (Light l in leftLights){
             l.enabled = false;
         }
