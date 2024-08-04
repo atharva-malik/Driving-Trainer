@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
         Rear
     }
 
+    public float wheelSensitivity;
+    public float steerTrim;
     [Serializable]
     public struct Wheel
     {
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour
 
 
     public float acceleratorPressure = 0f;
+    public float steerAnglePercentage = 0f;
 
     void Start()
     {
@@ -98,6 +101,28 @@ public class Player : MonoBehaviour
                     acceleratorPressure = 4f;
             }
             moveInput = acceleratorPressure/100;
+            //? Failed experiment, maybe I'll come back to it at a later date.
+            // if (Input.GetKey(KeyCode.D)){
+            //     if(steerAnglePercentage < 100){
+            //         steerAnglePercentage += 10f * Time.deltaTime * wheelSensitivity;
+            //     }else{
+            //         steerAnglePercentage = 100f;
+            //     }
+            // }else if (Input.GetKey(KeyCode.A)){
+            //     if(steerAnglePercentage > -100f){
+            //         steerAnglePercentage -= 10f * Time.deltaTime * wheelSensitivity;
+            //     }else{
+            //         steerAnglePercentage = -100f;
+            //     }
+            // }else{
+            //     if (steerAnglePercentage > -1 && steerAnglePercentage < 1 && !Input.GetKey(KeyCode.Space)) // Player is not braking
+            //         steerAnglePercentage = steerTrim;
+            //     else if (steerAnglePercentage > 0)
+            //         steerAnglePercentage -= 100f * Time.deltaTime * wheelSensitivity;
+            //     else
+            //         steerAnglePercentage += 100f * Time.deltaTime * wheelSensitivity;
+            // }
+            // steerInput = steerAnglePercentage/100;
             steerInput = Input.GetAxis("Horizontal");
         }
     }

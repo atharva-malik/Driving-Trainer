@@ -10,7 +10,8 @@ public class Gamemanager : MonoBehaviour
     [SerializeField] private TMP_Text countdown;
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private Player player;
-    [SerializeField] private Slider acceleratorPressure;
+    [SerializeField] private Slider acceleratorPressureSlider;
+    [SerializeField] private TMP_Text acceleratorPressureText;
 
     private GameObject playerObj;
 
@@ -24,7 +25,8 @@ public class Gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        acceleratorPressure.value = Math.Abs(player.acceleratorPressure/100);
+        acceleratorPressureText.text = Math.Round(Math.Abs(player.acceleratorPressure)).ToString() + "%";
+        acceleratorPressureSlider.value = Math.Abs(player.acceleratorPressure/100);
         if (playerObj.transform.position.y < 1 || Input.GetKeyDown(KeyCode.R)){
             playerObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             playerObj.GetComponent<Player>().resetWheels();
