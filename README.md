@@ -29,10 +29,14 @@ Because this game is *so* different to other driving games, I have included a li
 
 (R): Reset the car to the starting position
 
-The game works based on the concept of accelerator pressure, which is the amount of pressure you are putting on the accelerator. The more pressure you put on the accelerator, the faster the car will go. The game also has a realistic physics system, so the car will not stop instantly when you release the accelerator or brake.
+(E): Left indicator
+
+(Q): Right indicator
+
+The game works based on the concept of accelerator pressure, which is the amount of pressure you are applying to the accelerator. The more pressure you apply to the accelerator, the faster the car will go. The game also has a realistic physics system, so the car will not stop instantly when you release the accelerator or brake.
 
 ## Current Release
-The game is currently in beta (0.1) and is available for download on the releases page. The game is still in development and new features will be added in the future. Currently the game only has a fully accurate physics system and one road to drive on. More features will be added. "Watch" the repository to be notified about new features as they are added.
+The game is currently in beta (0.2) and is available for download on the releases page. The game is still in development and new features will be added in the future. Currently the game has a fully accurate physics system, one road to drive on, multiple road rules implemented, blinkers, and lights! More features will be added. "Watch" the repository to be notified about new features as they are added.
 
 ## Development
 Want to contribute? Great! Pull requests and issues are welcome! [Here] is an excellent guide on how to create pull requests and forks to request changes. I suggest using the addon "Better Comments" on Visual Studio Code as it makes the comments more readable. If you can not use the addon, I have used the following tags to make the comments more readable:
