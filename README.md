@@ -1,4 +1,5 @@
 # Driving Simulator
+![image](https://github.com/user-attachments/assets/d150f720-6df5-4121-bb93-f4051f26ee0e)
 
 This game is a 100% accurate (based on physics not graphics) accurate car driving simulator. It comes with all of the Australian Road Rules (WIP!!!) and is a great way to learn how to drive in Australia and is an amazing resource to practice for your practical driving test.
 
